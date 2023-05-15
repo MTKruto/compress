@@ -39,13 +39,14 @@ const possibleFlags = {
 //   "tandem": 17, // Tandem/NSK
 //   "theos": 18, // THEOS
 // };
-const os = {
+const os: Record<string, number> = {
   "darwin": 3,
   "linux": 3,
   "windows": 0,
 };
 
-const osCode = os[Deno.build.os] ?? 255;
+// deno-lint-ignore no-explicit-any
+const osCode = os[Deno?.build?.os as any] ?? 255;
 export const DEFAULT_LEVEL = 6;
 
 function putByte(n: number, arr: number[]) {
