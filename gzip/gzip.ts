@@ -45,9 +45,8 @@ const os: Record<string, number> = {
   "windows": 0,
 };
 
-
 // @ts-ignore
-const osCode = os[Deno?.build?.os as any] ?? 255;
+const osCode = os[globalThis["Deno"]?.build?.os as any] ?? 255;
 export const DEFAULT_LEVEL = 6;
 
 function putByte(n: number, arr: number[]) {
