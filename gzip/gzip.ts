@@ -45,7 +45,8 @@ const os: Record<string, number> = {
   "windows": 0,
 };
 
-// deno-lint-ignore no-explicit-any
+
+// @ts-ignore
 const osCode = os[Deno?.build?.os as any] ?? 255;
 export const DEFAULT_LEVEL = 6;
 
