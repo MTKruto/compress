@@ -1,12 +1,3 @@
-export * as tgz from "./tgz/mod.ts";
-export {
-  gunzipFile,
-  gzipFile,
-  GzipStream,
-  /** slow */
-  // gzip,
-  // gunzip,
-} from "./gzip/mod.ts";
 /** slow */
 // export { deflateRaw, inflateRaw } from "./deflate/mod.ts";
 /** fast */
