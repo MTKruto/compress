@@ -1,11 +1,1 @@
-/** slow */
-// export { deflateRaw, inflateRaw } from "./deflate/mod.ts";
-/** fast */
-export {
-  deflate,
-  deflateRaw,
-  gunzip,
-  gzip,
-  inflate,
-  inflateRaw,
-} from "./zlib/mod.ts";
+export { gunzip, gzip } from "./zlib/mod.ts";

@@ -268,7 +268,7 @@ function d_code(dist: any) {
 function put_short(s: any, w: any) {
   //    put_byte(s, (uch)((w) & 0xff));
   //    put_byte(s, (uch)((ush)(w) >> 8));
-  s.pending_buf[s.pending++] = (w) & 0xff;
+  s.pending_buf[s.pending++] = w & 0xff;
   s.pending_buf[s.pending++] = (w >>> 8) & 0xff;
 }
 
@@ -762,7 +762,7 @@ function build_tree(s: any, desc: any) {
    * two codes of non zero frequency.
    */
   while (s.heap_len < 2) {
-    node = s.heap[++s.heap_len] = (max_code < 2 ? ++max_code : 0);
+    node = s.heap[++s.heap_len] = max_code < 2 ? ++max_code : 0;
     tree[node * 2] /*.Freq*/ = 1;
     s.depth[node] = 0;
     s.opt_len--;
@@ -777,7 +777,7 @@ function build_tree(s: any, desc: any) {
   /* The elements heap[heap_len/2+1 .. heap_len] are leaves of the tree,
    * establish sub-heaps of increasing lengths:
    */
-  for (n = (s.heap_len >> 1 /*int /2*/); n >= 1; n--) pqdownheap(s, tree, n);
+  for (n = s.heap_len >> 1 /*int /2*/; n >= 1; n--) pqdownheap(s, tree, n);
 
   /* Construct the Huffman tree by repeatedly combining the least two
    * frequent nodes.

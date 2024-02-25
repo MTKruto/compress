@@ -135,17 +135,12 @@ export class Deflate {
   }
 }
 
-export function deflate(input: Uint8Array, options: DeflateOptions = {}) {
+function deflate(input: Uint8Array, options: DeflateOptions = {}) {
   const deflator = new Deflate(options);
   const result = deflator.push(input, true);
   // That will never happens, if you don't cheat with options :)
   if (deflator.err) throw deflator.msg || msg[deflator.err as CODE];
   return result;
-}
-
-export function deflateRaw(input: Uint8Array, options: DeflateOptions = {}) {
-  options.raw = true;
-  return deflate(input, options);
 }
 
 export function gzip(input: Uint8Array, options: DeflateOptions = {}) {

@@ -353,7 +353,7 @@ class HuftBuild {
     pidx = 1;
     xp = 2;
     while (--i > 0) { // note that i == g from above
-      x[xp++] = (j += p[pidx++]);
+      x[xp++] = j += p[pidx++];
     }
 
     // Make a table of values in order of bit lengths
@@ -443,7 +443,7 @@ class HuftBuild {
         if (pidx >= n) {
           r.e = 99; // out of values--invalid code
         } else if (p[pidx] < s) {
-          r.e = (p[pidx] < 256 ? 16 : 15); // 256 is end-of-block code
+          r.e = p[pidx] < 256 ? 16 : 15; // 256 is end-of-block code
           r.n = p[pidx++]; // simple code is just the value
         } else {
           if (e) r.e = e[p[pidx] - s]; // non-simple--look up in lists
@@ -479,7 +479,7 @@ class HuftBuild {
     this.m = lx[1];
 
     /* Return true (1) if we were given an incomplete table */
-    this.status = ((y !== 0 && g !== 1) ? 1 : 0);
+    this.status = (y !== 0 && g !== 1) ? 1 : 0;
   }
 }
 /* routines (inflate) */

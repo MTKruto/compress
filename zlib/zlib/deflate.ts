@@ -62,7 +62,7 @@ const MAX_BITS = 15;
 
 const MIN_MATCH = 3;
 const MAX_MATCH = 258;
-const MIN_LOOKAHEAD = (MAX_MATCH + MIN_MATCH + 1);
+const MIN_LOOKAHEAD = MAX_MATCH + MIN_MATCH + 1;
 const PRESET_DICT = 0x20;
 const INIT_STATE = 42;
 const EXTRA_STATE = 69;
@@ -95,7 +95,7 @@ function err(strm: ZStream, errorCode: CODE) {
 }
 
 function rank(f: number): number {
-  return ((f) << 1) - ((f) > 4 ? 9 : 0);
+  return (f << 1) - (f > 4 ? 9 : 0);
 }
 
 function zero(buf: Uint8Array | Uint16Array) {
@@ -134,7 +134,7 @@ function flush_pending(strm: ZStream) {
 function flush_block_only(s: DeflateState, last: any) {
   trees._tr_flush_block(
     s,
-    (s.block_start >= 0 ? s.block_start : -1),
+    s.block_start >= 0 ? s.block_start : -1,
     s.strstart - s.block_start,
     last,
   );
@@ -359,14 +359,14 @@ function fill_window(s: any) {
       p = n;
       do {
         m = s.head[--p];
-        s.head[p] = (m >= _w_size ? m - _w_size : 0);
+        s.head[p] = m >= _w_size ? m - _w_size : 0;
       } while (--n);
 
       n = _w_size;
       p = n;
       do {
         m = s.prev[--p];
-        s.prev[p] = (m >= _w_size ? m - _w_size : 0);
+        s.prev[p] = m >= _w_size ? m - _w_size : 0;
         /* If n is not on any hash chain, prev[n] is garbage but
          * its value will never be used.
          */
@@ -680,7 +680,7 @@ function deflate_fast(s: any, flush: any) {
       /***/
     }
   }
-  s.insert = ((s.strstart < (MIN_MATCH - 1)) ? s.strstart : MIN_MATCH - 1);
+  s.insert = (s.strstart < (MIN_MATCH - 1)) ? s.strstart : MIN_MATCH - 1;
   if (flush === STATUS.Z_FINISH) {
     /*** FLUSH_BLOCK(s, 1); ***/
     flush_block_only(s, true);
@@ -1309,7 +1309,7 @@ function deflateResetKeep(strm: ZStream) {
     s.wrap = -s.wrap;
     /* was made negative by deflate(..., Z_FINISH); */
   }
-  s.status = (s.wrap ? INIT_STATE : BUSY_STATE);
+  s.status = s.wrap ? INIT_STATE : BUSY_STATE;
   strm.adler = (s.wrap === 2)
     ? 0 // crc32(0, Z_NULL, 0)
     : 1; // adler32(0, Z_NULL, 0)
@@ -1523,7 +1523,7 @@ export function deflate(strm: ZStream, flush: number) {
       } else {
         level_flags = 3;
       }
-      header |= (level_flags << 6);
+      header |= level_flags << 6;
       if (s.strstart !== 0) header |= PRESET_DICT;
       header += 31 - (header % 31);
 
