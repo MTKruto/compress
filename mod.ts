@@ -1,4 +1,3 @@
-export * as tar from "./tar/mod.ts";
 export * as tgz from "./tgz/mod.ts";
 export {
   gunzipFile,
